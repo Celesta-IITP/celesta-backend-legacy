@@ -101,9 +101,9 @@ if($status!=400){
         // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
         // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
         $mail->isHTML(true);                                  // Set email format to HTML
-        $mail->Subject = "Celesta 2017 registration confirmation";
-        $mail->Body    = "Registered!\nHi ".$_POST['name'].",\n Thank you for registering for Celesta'17. Your Registered Id is : TAM$id .\n";
-        $altBody = "Hi name,\nThank you for registering for Celesta'17. Your Registered Id is : TAM$id .\n";
+        $mail->Subject = "Celesta 2018 registration confirmation";
+        $mail->Body    = "Registered!\nHi ".$_POST['name'].",\n Thank you for registering for Celesta'18. Your Registered Id is : CLST$id .\n";
+        $altBody = "Hi name,\nThank you for registering for Celesta'18. Your Registered Id is : CLST$id .\n";
         $mail->AltBody = $altBody;
         $mail->send();
         //send SMS
