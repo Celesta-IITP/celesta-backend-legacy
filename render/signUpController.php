@@ -39,10 +39,10 @@ if (!isset($_POST['college']) || $_POST['college']=="") {
 	$error .= "College blank. ";
 	$status = 400;
 }
-if (isset($_POST['caID']) && $_POST['college']!="") {
+if (isset($_POST['caID']) && $_POST['caID']!="") {
 	$caID = $_POST['caID'];
 }
-if (isset($_POST['isCA']) && $_POST['college']!="") {
+if (isset($_POST['isCA']) && $_POST['isCA']!="") {
 	$isCA = $_POST['isCA'];
 }
 
