@@ -12,6 +12,9 @@ function SQLInjFilter(&$unfilteredString){
 }
 $error = "";
 $return = "";
+$caID = 0;
+$isCA = 0;
+$clstID = 0;
 $status = 0;
 $ret = array();
 //$json = file_get_contents('php://input');
@@ -36,6 +39,13 @@ if (!isset($_POST['college']) || $_POST['college']=="") {
 	$error .= "College blank. ";
 	$status = 400;
 }
+if (isset($_POST['caID']) && $_POST['college']!="") {
+	$caID = $_POST['caID'];
+}
+if (isset($_POST['isCA']) && $_POST['college']!="") {
+	$isCA = $_POST['isCA'];
+}
+
 //if (!isset($_POST['year']) || $_POST['year']<1 || $_POST['year']>4) {
 //	$error .= "Year invalid. ";
 //	$status = 400;
@@ -47,8 +57,10 @@ if($status!=400){
 	SQLInjFilter($_POST['college']);
 	SQLInjFilter($_POST['password']);
 	SQLInjFilter($_POST['name']);
+	SQLInjFilter($_POST['caID']);
+	SQLInjFilter($_POST['isCA']);
 	//db stuff here
-	$sql = "INSERT INTO `users`(name,email, phone,pswd, college, year) VALUES ('".$_POST['name']."', '".$_POST['emailid']."', '".$_POST['mobile']."', '".sha1($_POST['password'])."', '".$_POST['college']."','1')";
+	$sql = "INSERT INTO `users`(name,email, phone,pswd, college, year, caID, isCA) VALUES ('".$_POST['name']."', '".$_POST['emailid']."', '".$_POST['mobile']."', '".sha1($_POST['password'])."', '".$_POST['college']."','1', '". $caID ."', '". $isCA ."')";
 	//password field absent, otherwise also store sha1($_POST['password'])
 	//assuming table name 'users' as not given in email
 	$id=0;
@@ -64,7 +76,10 @@ if($status!=400){
                 while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
 			$id=$row['regID'];
 		}
-	    }}	$mail = new PHPMailer;
+	    }}	
+	
+	$clstID =$id;
+	$mail = new PHPMailer;
         // 0 = off (for production use)
         // 1 = client messages
         // 2 = client and server messages
@@ -122,6 +137,7 @@ if($status!=400){
 // 	$return="Successfully Registered";
 if($status == 200){
 	$ret["status"] = 200;
+	$ret["id"] = $clstID;
 	$ret["message"] = $return;
 }else{
 	$ret["status"] = $status;
