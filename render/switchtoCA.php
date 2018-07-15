@@ -65,9 +65,6 @@ if($status!=400){
 if($status == 200){
   $ret["status"] = 200;
   $ret["ID"] = $uID;
-  $ret["name"]=$uName;
-  $ret["college"]=$college;
-  $ret["events"]=['mayank','chutiya'];
   $ret["message"] = $return;
 }else{
   $ret["status"] = $status;
