@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'dbConfig.php';
 include 'render/log.php';
 include 'render/checkAccess.php';
@@ -38,13 +39,15 @@ if($status!=400){
         $debug.="  in3 ".mysqli_num_rows($result);
         while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
           if($row['pswd']==sha1($_POST['password'])){
-            $sql = "UPDATE users SET isCA = '1', caID = '".$row['regID']."' WHERE regID = '".$row['regID']."'";
+            $sql = "UPDATE users SET isCA = '1', caID = '0' WHERE regID = '".$row['regID']."'";
             $result = mysqli_query($link,$sql);
-            if(!$result || mysqli_num_rows($result)<1){ 
+            if(!$result){ 
                 $status = 402;
                 $error="Cannot change to CA";
             } else {
                 $status=200;
+                $_SESSION['uid']= $row['regID'];
+                $_SESSION['name'] = $row['name'];
                 $return="Account change successsful";
             }
             //set sessionID etc etc...
