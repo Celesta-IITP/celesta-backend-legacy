@@ -1,5 +1,6 @@
 
 <?php
+session_start();
 include 'dbConfig.php';
 include 'render/log.php';
 include 'render/checkAccess.php';
@@ -13,8 +14,8 @@ $return = "";
 $status = 0;
 $uID=-1;
 $ret = array();
-if (!isset($_POST['emailid']) || !filter_var($_POST['emailid'], FILTER_VALIDATE_EMAIL) ) {
-	$error .= "emailID blank. ";
+if (!isset($_POST['emailid'])) ) {
+	$error .= "Celesta ID blank. ";
 	$status = 400;
 }
 if (!isset($_POST['password']) || $_POST['password']=='' ) {
@@ -27,8 +28,9 @@ if($status!=400){
 	//SQL inj sanitation here?
 	SQLInjFilter($_POST['emailid']);
 	SQLInjFilter($_POST['password']);
+	$celesta_id = substr($_POST['emailid'], 4);
 	//db stuff here
-	$sql = "SELECT * FROM users WHERE `email`= '".$_POST['emailid']."'";
+	$sql = "SELECT * FROM users WHERE `regID`= '".$celesta_id."'";
 	if($link =mysqli_connect($servername, $username, $password, $dbname)){
 	$result = mysqli_query($link,$sql);
 	    if(!$result || mysqli_num_rows($result)<1){
@@ -67,6 +69,7 @@ if($status == 200){
 	$ret["name"]=$uName;
 	$ret["college"]=$college;
 	$ret["events"]=['mayank','chutiya'];
+	$ret["events"]=['Piyush','bhi','chutiya'];
 	$ret["message"] = $return;
 
 }else{
