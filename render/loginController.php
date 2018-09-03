@@ -14,7 +14,7 @@ $return = "";
 $status = 0;
 $uID=-1;
 $ret = array();
-if (!isset($_POST['emailid'])) ) {
+if (!isset($_POST['emailid'])) {
 	$error .= "Celesta ID blank. ";
 	$status = 400;
 }
