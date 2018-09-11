@@ -38,6 +38,10 @@ elseif (preg_match($base . 'login?$@', $url, $match)) {
 	require ('render/loginController.php');
 } elseif (preg_match($base . 'register?$@', $url, $match)) {
         require ('render/signUpController.php');
+} elseif (preg_match($base . 'reset?$@', $url, $match)) {
+        require ('render/reset.php');
+} elseif (preg_match($base . 'forgot?$@', $url, $match)) {
+        require ('render/forgot.php');
 } elseif (preg_match($base . 'switchtoCA?$@', $url, $match)) {
         require ('render/switchtoCA.php');
 } elseif (preg_match($base . 'cAPI/(.*)$@', $url, $match)) {
