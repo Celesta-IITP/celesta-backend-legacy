@@ -38,6 +38,8 @@ elseif (preg_match($base . 'login?$@', $url, $match)) {
 	require ('render/loginController.php');
 } elseif (preg_match($base . 'register?$@', $url, $match)) {
         require ('render/signUpController.php');
+} elseif (preg_match($base . 'event_reg?$@', $url, $match)) {
+        require ('render/eventRegistration.php');
 } elseif (preg_match($base . 'resend?$@', $url, $match)) {
         require ('render/resend.php');
 } elseif (preg_match($base . 'reset?$@', $url, $match)) {
