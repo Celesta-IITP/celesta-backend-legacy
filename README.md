@@ -58,10 +58,10 @@ Indicating person is leaving campus.
 Following APIs haven't been implemented but are under development:       
        
 Get list of registered users for event {eventID}       
-`qr/event/{eventID}/`       
+`qr/getReg/{eventID}/`       
        
 Register user for event       
-`qr/event/{eventID}/{qrHash}`       
+`qr/setReg/{eventID}/{qrHash}`       
        
 Status code:  
   * 200 : successful   
